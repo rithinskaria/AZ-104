@@ -1,0 +1,2 @@
+# kodekloud-azure
+Azure scripts
