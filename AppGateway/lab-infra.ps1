@@ -47,7 +47,7 @@ $vnet = New-AzVirtualNetwork `
   -Location $region `
   -Name "color-web-vnet" `
   -AddressPrefix 10.0.0.0/16 `
-  -Subnet $jumpBox, $greenSubnet, $redSubnet
+  -Subnet $jumpBox, $greenSubnet, $redSubnet, $blueSubnet
 
 #---------------------------------------------------#
 
@@ -66,7 +66,7 @@ Set-AzVirtualNetworkSubnetConfig -Name greenSubnet -VirtualNetwork $vnet -Addres
 Set-AzVirtualNetworkSubnetConfig -Name redSubnet -VirtualNetwork $vnet -AddressPrefix "10.0.2.0/24" `
 -NetworkSecurityGroup $networkSecurityGroup
 
-Set-AzVirtualNetworkSubnetConfig -Name blueSubnet -VirtualNetwork $vnet -AddressPrefix "10.0.2.0/24" `
+Set-AzVirtualNetworkSubnetConfig -Name blueSubnet -VirtualNetwork $vnet -AddressPrefix "10.0.3.0/24" `
 -NetworkSecurityGroup $networkSecurityGroup
 
 $vnet | Set-AzVirtualNetwork
@@ -147,7 +147,7 @@ for($i=1; $i -le 2; $i++){
 
 #---------------------blue Pool Servers------------------------------#
 
-for($i=1; $i -le 3; $i++){
+for($i=1; $i -le 2; $i++){
 
     $workloadNIC = New-AzNetworkInterface -Name "blue-0$i-nic" -ResourceGroupName $rg `
     -Location $region -SubnetId $vnet.Subnets[3].Id
