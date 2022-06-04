@@ -32,9 +32,11 @@ printenv | grep VAR
 echo "Setting up green VM"
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
+sudo mkdir /var/www/red
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sample.html" > /var/www/html/index.html
 sed -i "s/PAGECOLOR/red/g" /var/www/html/index.html
 sed -i "s/VMID/$k/g" /var/www/html/index.html
+cp /var/www/html/index.html /var/www/html/red/red.html
 exit
 '"
 
@@ -52,9 +54,11 @@ printenv | grep VAR
 echo "Setting up green VM"
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
+sudo mkdir /var/www/blue
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sample.html" > /var/www/html/index.html
 sed -i "s/PAGECOLOR/blue/g" /var/www/html/index.html
 sed -i "s/VMID/$k/g" /var/www/html/index.html
+cp /var/www/html/index.html /var/www/html/red/red.html
 exit
 '"
 done
