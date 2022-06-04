@@ -105,7 +105,7 @@ $jumpVm = New-AzVM -Name jumpbox-vm `
 -Credential $credential `
 -PublicIpAddressName 'jumpbox-pip'
 
-Write-Host "Configuring VMs..." -BackgroundColor Yellow -ForegroundColor White 
+Write-Host "`nConfiguring VMs..." -BackgroundColor Green -ForegroundColor White 
 
 $Params = @{
     ResourceGroupName  = $rg
@@ -118,7 +118,7 @@ $Params = @{
 }
 Set-AzVMExtension @Params
 
-Write-Host "Deployment Completed!!" -BackgroundColor Yellow -ForegroundColor White 
+Write-Host "Deployment Completed!!" -BackgroundColor Green -ForegroundColor White 
 
 $fqdn = $jumpVm.FullyQualifiedDomainName
 Write-Host "Jumpbox VM DNS name : $fqdn "
