@@ -107,16 +107,20 @@ $jumpVm = New-AzVM -Name jumpbox-vm `
 
 Write-Host "`nConfiguring VMs..." -BackgroundColor Green -ForegroundColor White 
 
+for ($i=1; $i -le 3; $i++){
+
 $Params = @{
     ResourceGroupName  = $rg
-    VMName             = 'jumpbox-vm'
+    VMName             = "webserver-0$i"
     Name               = 'CustomScript'
     Publisher          = 'Microsoft.Azure.Extensions'
     ExtensionType      = 'CustomScript'
     TypeHandlerVersion = '2.1'
-    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/Azure%20Load%20Balancer/jumpbox.sh'); commandToExecute = './jumpbox.sh'}
+    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/jumpbox-lb.sh'); commandToExecute = './jumpbox-lb.sh'}
 }
 Set-AzVMExtension @Params
+
+}
 
 Write-Host "Deployment Completed!!" -BackgroundColor Green -ForegroundColor White 
 
