@@ -1,10 +1,10 @@
 #!/bin/bash
 sudo apt update -y
 sudo apt install sshpass -y
-colors=("red","green","blue")
-for i in {1..3}
+colors=(red green blue)
+for i in {0..2}
 do
-j=$(($i + 3))
+j=$(($i + 4))
 ip="10.0.2.$j"
 sshpass -p "VMP@55w0rd" ssh -o StrictHostKeyChecking=no rithin@$ip bash -c \
 "'sudo apt install apache2 -y
