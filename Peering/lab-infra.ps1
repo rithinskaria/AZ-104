@@ -16,6 +16,32 @@ New-AzResourceGroup -n $rg -l $region
 #########-----Create resources---------######
 
 #Creating vnet and VMs
+Write-Host "Adding EUS subnet configuration" `
+-ForegroundColor "Yellow" -BackgroundColor "Black"
+
+$eusSubnet = New-AzVirtualNetworkSubnetConfig `
+  -Name 'default' `
+  -AddressPrefix 10.0.0.0/24
+
+New-AzVirtualNetwork `
+  -ResourceGroupName $rg `
+  -Location eastus `
+  -Name "eus-vnet" `
+  -AddressPrefix 10.0.0.0/16 `
+  -Subnet $eusSubnet
+
+Write-Host "Adding WUS subnet configuration" `
+-ForegroundColor "Yellow" -BackgroundColor "Black"
+$wusSubnet = New-AzVirtualNetworkSubnetConfig `
+  -Name 'privateSubnet' `
+  -AddressPrefix 192.168.1.0/24
+
+New-AzVirtualNetwork `
+  -ResourceGroupName $rg `
+  -Location westus `
+  -Name "wus-vnet" `
+  -AddressPrefix 192.168.0.0/16 `
+  -Subnet $wusSubnet
 
 Write-Host "Creating East US VM" -ForegroundColor "Yellow" -BackgroundColor "Black"
 $eusVm = New-AzVM -Name 'eus-prod-server' `
