@@ -103,7 +103,9 @@ $jumpVm = New-AzVM -Name jumpbox-vm `
 -VirtualNetworkName eus-web-dev `
 -SubnetName jumpboxSubnet `
 -Credential $credential `
--PublicIpAddressName 'jumpbox-pip' 
+-PublicIpAddressName 'jumpbox-pip'
+
+Write-Host "Configuring VMs..." -BackgroundColor Yellow -ForegroundColor White 
 
 $Params = @{
     ResourceGroupName  = $rg
@@ -112,7 +114,7 @@ $Params = @{
     Publisher          = 'Microsoft.Azure.Extensions'
     ExtensionType      = 'CustomScript'
     TypeHandlerVersion = '2.1'
-    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/jumpbox-lb.sh'); commandToExecute = './jumpbox-lb.sh'}
+    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/Azure%20Load%20Balancer/jumpbox.sh'); commandToExecute = './jumpbox.sh'}
 }
 Set-AzVMExtension @Params
 
