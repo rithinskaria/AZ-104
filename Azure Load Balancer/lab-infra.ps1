@@ -107,11 +107,11 @@ $jumpVm = New-AzVM -Name jumpbox-vm `
 
 Write-Host "`nConfiguring VMs..." -BackgroundColor Green -ForegroundColor White 
 
-for ($i=1; $i -le 3; $i++){
+
 
 $Params = @{
     ResourceGroupName  = $rg
-    VMName             = "webserver-0$i"
+    VMName             = 'jumpbox-vm'
     Name               = 'CustomScript'
     Publisher          = 'Microsoft.Azure.Extensions'
     ExtensionType      = 'CustomScript'
@@ -120,7 +120,7 @@ $Params = @{
 }
 Set-AzVMExtension @Params
 
-}
+
 
 Write-Host "Deployment Completed!!" -BackgroundColor Green -ForegroundColor White 
 
