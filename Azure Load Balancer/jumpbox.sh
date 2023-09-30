@@ -11,9 +11,7 @@ ssh -o StrictHostKeyChecking=no kodekloud@$ip bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up webserver-0$i VM"
-sudo -s
-sudo mv /etc/apt/sources.list /etc/apt/sources.list_bkp
-sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > /etc/apt/sources.list
+sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list"  | sudo tee /etc/apt/sources.list
 sudo apt update
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
