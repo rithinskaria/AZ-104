@@ -11,7 +11,8 @@ ssh -o StrictHostKeyChecking=no kodekloud@$greenIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up green VM"
-sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list"  | sudo tee /etc/apt/sources.list
+sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
+sudo cp ~/sources.list /etc/apt/sources.list
 sudo apt update 
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
@@ -32,7 +33,8 @@ ssh -o StrictHostKeyChecking=no kodekloud@$redIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up red VM"
-sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list"  | sudo tee /etc/apt/sources.list
+sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
+sudo cp ~/sources.list /etc/apt/sources.list
 sudo apt update 
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
@@ -56,7 +58,8 @@ ssh -o StrictHostKeyChecking=no kodekloud@$blueIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up blue VM"
-sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list"  | sudo tee /etc/apt/sources.list
+sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
+sudo cp ~/sources.list /etc/apt/sources.list
 sudo apt update 
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
