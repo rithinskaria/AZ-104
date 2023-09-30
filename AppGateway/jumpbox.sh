@@ -13,7 +13,6 @@ printenv | grep VAR
 echo "Setting up green VM"
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
 sudo cp ~/sources.list /etc/apt/sources.list
-sudo apt update 
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sample.html" > /var/www/html/index.html
@@ -35,7 +34,6 @@ printenv | grep VAR
 echo "Setting up red VM"
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
 sudo cp ~/sources.list /etc/apt/sources.list
-sudo apt update 
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
 sudo mkdir -v /var/www/html/red/
@@ -60,7 +58,6 @@ printenv | grep VAR
 echo "Setting up blue VM"
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
 sudo cp ~/sources.list /etc/apt/sources.list
-sudo apt update 
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
 sudo mkdir -v /var/www/html/blue/
