@@ -11,6 +11,7 @@ ssh -o StrictHostKeyChecking=no kodekloud@$greenIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up green VM"
+sudo -s
 sudo mv /etc/apt/sources.list /etc/apt/sources.list_bkp
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > /etc/apt/sources.list
 sudo apt update 
@@ -33,6 +34,7 @@ ssh -o StrictHostKeyChecking=no kodekloud@$redIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up red VM"
+sudo -s
 sudo mv /etc/apt/sources.list /etc/apt/sources.list_bkp
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > /etc/apt/sources.list
 sudo apt update 
@@ -58,6 +60,7 @@ ssh -o StrictHostKeyChecking=no kodekloud@$blueIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up blue VM"
+sudo -s
 sudo mv /etc/apt/sources.list /etc/apt/sources.list_bkp
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > /etc/apt/sources.list
 sudo apt update 
