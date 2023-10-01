@@ -96,11 +96,11 @@ for($i=1; $i -le 2; $i++){
 
     $VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $workloadNIC.Id
 
-    $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
-    -PublisherName 'Canonical' `
-    -Offer 'UbuntuServer' `
-    -Skus '18.04-LTS' `
-    -Version latest
+        $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
+            -PublisherName 'Canonical' `
+            -Offer '0001-com-ubuntu-server-jammy' `
+            -Skus '22_04-lts-gen2' `
+            -Version latest 
 
     Write-Host "Creating VM green-0$i" -ForegroundColor "Yellow" -BackgroundColor "Black"
     New-AzVM -ResourceGroupName $rg -Location $region -VM $VirtualMachine
@@ -132,11 +132,11 @@ for($i=1; $i -le 2; $i++){
 
     $VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $workloadNIC.Id
 
-    $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
-    -PublisherName 'Canonical' `
-    -Offer 'UbuntuServer' `
-    -Skus '18.04-LTS' `
-    -Version latest
+        $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
+            -PublisherName 'Canonical' `
+            -Offer '0001-com-ubuntu-server-jammy' `
+            -Skus '22_04-lts-gen2' `
+            -Version latest 
 
     Write-Host "Creating VM red-0$i" -ForegroundColor "Yellow" -BackgroundColor "Black"
     New-AzVM -ResourceGroupName $rg -Location $region -VM $VirtualMachine
@@ -168,11 +168,11 @@ for($i=1; $i -le 2; $i++){
 
     $VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $workloadNIC.Id
 
-    $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
-    -PublisherName 'Canonical' `
-    -Offer 'UbuntuServer' `
-    -Skus '18.04-LTS' `
-    -Version latest
+        $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
+            -PublisherName 'Canonical' `
+            -Offer '0001-com-ubuntu-server-jammy' `
+            -Skus '22_04-lts-gen2' `
+            -Version latest 
 
     Write-Host "Creating VM blue-0$i" -ForegroundColor "Yellow" -BackgroundColor "Black"
     New-AzVM -ResourceGroupName $rg -Location $region -VM $VirtualMachine
@@ -190,7 +190,7 @@ $jumpVm = New-AzVM -Name jumpbox-vm `
 -ResourceGroupName $rg `
 -Location $region `
 -Size 'Standard_B1s' `
--Image UbuntuLTS `
+-Image Ubuntu2204 `
 -VirtualNetworkName color-web-vnet `
 -SubnetName jumpboxSubnet `
 -PublicIpAddressName 'jumpbox-appgw-pip' `
