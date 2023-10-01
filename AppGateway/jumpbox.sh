@@ -11,8 +11,6 @@ ssh -o StrictHostKeyChecking=no kodekloud@$greenIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up green VM"
-sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
-sudo cp ~/sources.list /etc/apt/sources.list
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
 sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sample.html" > /var/www/html/index.html
@@ -32,8 +30,6 @@ ssh -o StrictHostKeyChecking=no kodekloud@$redIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up red VM"
-sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
-sudo cp ~/sources.list /etc/apt/sources.list
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
 sudo mkdir -v /var/www/html/red/
@@ -56,8 +52,6 @@ ssh -o StrictHostKeyChecking=no kodekloud@$blueIp bash -c  \
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up blue VM"
-sudo curl "https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/sources.list" > ~/sources.list
-sudo cp ~/sources.list /etc/apt/sources.list
 sudo apt install apache2 -y
 sudo chmod -R -v 777 /var/www/
 sudo mkdir -v /var/www/html/blue/
