@@ -82,11 +82,11 @@ for($i=1; $i -le 3; $i++){
 
     $VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $webServersNIC.Id
 
-    $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
-    -PublisherName 'Canonical' `
-    -Offer 'UbuntuServer' `
-    -Skus '18.04-LTS' `
-    -Version latest
+        $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
+            -PublisherName 'Canonical' `
+            -Offer '0001-com-ubuntu-server-jammy' `
+            -Skus '22_04-lts-gen2' `
+            -Version latest 
 
     Write-Host "Creating VM webserver-0$i" -ForegroundColor "Yellow" -BackgroundColor "Black"
     New-AzVM -ResourceGroupName $rg -Location $region -VM $VirtualMachine
