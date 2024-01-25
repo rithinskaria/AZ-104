@@ -2,10 +2,16 @@
 
 # Azure AZ-104 Exam Preparation Scripts
 
-<span style="color: red;">**NOTE: This repository is archived and there will be no further developments on this. Please visit [kodekloud-az104](https://github.com/rithinskaria/kodekloud-az104) for future developments.**</span>
-
 ## About the AZ-104 Exam
 The Azure AZ-104 exam, known as the Microsoft Azure Administrator Associate certification, assesses candidates' abilities to manage Azure identities and governance, implement and manage storage, deploy and manage Azure compute resources, configure and manage virtual networking, and monitor and back up Azure resources. This repository hosts scripts and resources aimed at aiding individuals in preparing for the AZ-104 exam, with practical use cases and exercises across various administrative domains.
+
+## Folder Structure and Topics (in v2)
+
+- `050-Administer Virtual Networking`: Scripts for managing and configuring Azure virtual networks, including network connectivity and integration with on-premises networks.
+- `060-Administer Intersite Connectivity`: Tools and configurations for managing intersite connectivity features like VPN Gateway and Azure ExpressRoute.
+- `070-Administer Network Traffic`: Best practices and scripts for routing and controlling network traffic within Azure, including Network Watcher and traffic analytics.
+- `090-Administer Azure Virtual Machines`: Measures for managing and configuring Azure virtual machines, including VM deployment, scaling, and management.
+- `120-Administer Monitoring`: Operational scripts for monitoring Azure resources, setting up alerts, and log analytics.
 
 ## Prerequisites
 
@@ -23,4 +29,3 @@ Encounter an issue or error in the code? Please feel free to open an issue in th
 ## License
 
 For learning and development purposes only.
-
