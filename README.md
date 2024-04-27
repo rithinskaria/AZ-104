@@ -2,6 +2,8 @@
 
 # Azure AZ-104 Exam Preparation Scripts
 
+
+
 **NOTE: This repository has been updated to v2, which includes refreshed scripts written in PowerShell 7 and aligned with the new course topics. The v1 directory is for reference purposes only.**
 
 ## About the AZ-104 Exam
