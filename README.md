@@ -1,4 +1,4 @@
-![Azure Exam AZ-104 Logo](https://res.cloudinary.com/kodekloud/image/upload/v1698643790/webflow/631f022194d7ef36d9303cbb_Horizontal.svg)
+
 
 # Azure AZ-104 Exam Preparation Scripts
 
