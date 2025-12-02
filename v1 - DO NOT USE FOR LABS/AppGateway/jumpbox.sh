@@ -1,4 +1,13 @@
 #!/bin/bash
+# Jumpbox configuration script for Application Gateway demo
+# Note: Password should be passed as environment variable for security
+# Usage: VMPASSWORD="your_password" ./jumpbox.sh
+
+if [ -z "$VMPASSWORD" ]; then
+    echo "Warning: VMPASSWORD environment variable not set. Using default (not recommended for production)"
+    VMPASSWORD="VMP@55w0rd"
+fi
+
 sudo apt update -y
 sudo apt install sshpass -y
 for i in {0..1}
@@ -6,8 +15,8 @@ do
 j=$(($i + 4))
 k=$(($i + 1))
 greenIp="10.0.1.$j"
-sshpass -p "VMP@55w0rd" \
-ssh -o StrictHostKeyChecking=no kodekloud@$greenIp bash -c  \
+sshpass -p "$VMPASSWORD" `
+ssh -o StrictHostKeyChecking=no kodekloud@$greenIp bash -c  `
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up green VM"
@@ -25,8 +34,8 @@ do
 j=$(($i + 4))
 k=$(($i + 1))
 redIp="10.0.2.$j"
-sshpass -p "VMP@55w0rd" \
-ssh -o StrictHostKeyChecking=no kodekloud@$redIp bash -c  \
+sshpass -p "$VMPASSWORD" `
+ssh -o StrictHostKeyChecking=no kodekloud@$redIp bash -c  `
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up red VM"
@@ -47,8 +56,8 @@ do
 j=$(($i + 4))
 k=$(($i + 1))
 blueIp="10.0.3.$j"
-sshpass -p "VMP@55w0rd" \
-ssh -o StrictHostKeyChecking=no kodekloud@$blueIp bash -c  \
+sshpass -p "$VMPASSWORD" `
+ssh -o StrictHostKeyChecking=no kodekloud@$blueIp bash -c  `
 "'export VAR=$i
 printenv | grep VAR
 echo "Setting up blue VM"

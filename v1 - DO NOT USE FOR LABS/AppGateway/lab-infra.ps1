@@ -4,11 +4,11 @@ Clear-Host
 $rg = read-host "(new) Resource Group Name"
 $region = "eastus"
 $username = "kodekloud" #username for the VM
-$plainPassword = "VMP@55w0rd" #your VM password
 $VMSize = "Standard_B1s"
 
-#Creating VM credential; use your own password and username by changing the variables if needed
-$password = ConvertTo-SecureString $plainPassword -AsPlainText -Force
+#Creating VM credential with secure password input
+$password = Read-Host "Enter VM Password" -AsSecureString
+$plainPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))
 
 Write-Host "Application Gateway Demo Infra - v2.0, written by Rithin Skaria" `
 -ForegroundColor "Red" -BackgroundColor "White"
@@ -26,6 +26,10 @@ Write-Host "Adding subnet configuration" `
 $jumpBox = New-AzVirtualNetworkSubnetConfig `
   -Name 'jumpboxSubnet' `
   -AddressPrefix 10.0.0.0/24
+
+$appGwSubnet = New-AzVirtualNetworkSubnetConfig `
+  -Name 'appGatewaySubnet' `
+  -AddressPrefix 10.0.4.0/24
  
 $greenSubnet = New-AzVirtualNetworkSubnetConfig `
   -Name 'greenSubnet' `
@@ -47,7 +51,7 @@ $vnet = New-AzVirtualNetwork `
   -Location $region `
   -Name "color-web-vnet" `
   -AddressPrefix 10.0.0.0/16 `
-  -Subnet $jumpBox, $greenSubnet, $redSubnet, $blueSubnet
+  -Subnet $jumpBox, $appGwSubnet, $greenSubnet, $redSubnet, $blueSubnet
 
 #---------------------------------------------------#
 
@@ -58,7 +62,7 @@ $webRule = New-AzNetworkSecurityRuleConfig -Name web-rule -Description "Allow HT
     -DestinationAddressPrefix * -DestinationPortRange 80
 
 $networkSecurityGroup = New-AzNetworkSecurityGroup -ResourceGroupName $rg `
--Location $region -Name "appGwNSG" -SecurityRules $rdpRule
+-Location $region -Name "appGwNSG" -SecurityRules $webRule
 
 Set-AzVirtualNetworkSubnetConfig -Name greenSubnet -VirtualNetwork $vnet -AddressPrefix "10.0.1.0/24" `
 -NetworkSecurityGroup $networkSecurityGroup
@@ -78,7 +82,7 @@ $vnet | Set-AzVirtualNetwork
 for($i=1; $i -le 2; $i++){
 
     $workloadNIC = New-AzNetworkInterface -Name "green-0$i-nic" -ResourceGroupName $rg `
-    -Location $region -SubnetId $vnet.Subnets[1].Id
+    -Location $region -SubnetId $vnet.Subnets[2].Id
 
     Write-Host "----------------------------------------------------" `
     -ForegroundColor "Yellow" -BackgroundColor "Black"
@@ -114,7 +118,7 @@ for($i=1; $i -le 2; $i++){
 for($i=1; $i -le 2; $i++){
 
     $workloadNIC = New-AzNetworkInterface -Name "red-0$i-nic" -ResourceGroupName $rg `
-    -Location $region -SubnetId $vnet.Subnets[2].Id
+    -Location $region -SubnetId $vnet.Subnets[3].Id
 
     Write-Host "----------------------------------------------------" `
     -ForegroundColor "Yellow" -BackgroundColor "Black"
@@ -150,7 +154,7 @@ for($i=1; $i -le 2; $i++){
 for($i=1; $i -le 2; $i++){
 
     $workloadNIC = New-AzNetworkInterface -Name "blue-0$i-nic" -ResourceGroupName $rg `
-    -Location $region -SubnetId $vnet.Subnets[3].Id
+    -Location $region -SubnetId $vnet.Subnets[4].Id
 
     Write-Host "----------------------------------------------------" `
     -ForegroundColor "Yellow" -BackgroundColor "Black"
@@ -196,7 +200,7 @@ $jumpVm = New-AzVM -Name jumpbox-vm `
 -PublicIpAddressName 'jumpbox-appgw-pip' `
 -Credential $credential 
 
-Write-Host "Running script on jumpbox..." -BackgroundColor Green -ForegroundColor White 
+Write-Host "Running configuration script on jumpbox..." -BackgroundColor Green -ForegroundColor White 
 
 $Params = @{
     ResourceGroupName  = $rg
@@ -205,7 +209,7 @@ $Params = @{
     Publisher          = 'Microsoft.Azure.Extensions'
     ExtensionType      = 'CustomScript'
     TypeHandlerVersion = '2.1'
-    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/jumpbox.sh'); commandToExecute = './jumpbox.sh'}
+    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/jumpbox.sh'); commandToExecute = "export VMPASSWORD='$plainPassword' && chmod +x jumpbox.sh && ./jumpbox.sh"}
 }
 Set-AzVMExtension @Params
 
